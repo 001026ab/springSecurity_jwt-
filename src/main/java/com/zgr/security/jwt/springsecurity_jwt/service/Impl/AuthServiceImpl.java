@@ -25,9 +25,6 @@ import java.util.ArrayList;
 public class AuthServiceImpl implements AuthService {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
@@ -39,15 +36,11 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String login(String username, String password) {
-
-        /*UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
-        final Authentication authentication = authenticationManager.authenticate(upToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);*/
-
         User userByName = userService.getUserByName(username);
         if (userByName == null) {
             return "账号错误";
         }
+        //校验密码是否正确
         //进行密码的比较，将用户输入的密码进行加密与数据库查出的密码进行比较是否相同
         if (BCrypt.checkpw(password, userByName.getPassword())) {
             final UserDetails userDetails = userDetailsService.loadUserByUsername(username);

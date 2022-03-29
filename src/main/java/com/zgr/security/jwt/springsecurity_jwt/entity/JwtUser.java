@@ -15,7 +15,8 @@ import java.util.List;
  * @author zgr
  * @version 1.0
  * @date 2022/3/28 14:34
- * jwt获取权限
+ * jwt获取权限列表，
+ * 在实现了UserDetailsService接口的类中的loadUserByUsername方法中使用
  */
 
 @Data

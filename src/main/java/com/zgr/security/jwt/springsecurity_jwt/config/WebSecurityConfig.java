@@ -61,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT).authenticated()
                 .antMatchers(HttpMethod.DELETE).authenticated()
                 .antMatchers(HttpMethod.GET).authenticated()
+                //那两个异常文件只需要在这里配置就可以，在and后面
                 .and()
                 //token异常或过期，无token等异常处理
                 .exceptionHandling().authenticationEntryPoint(new JWTAuthenticationEntryPoint())

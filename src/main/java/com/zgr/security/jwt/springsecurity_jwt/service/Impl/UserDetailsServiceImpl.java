@@ -21,6 +21,7 @@ import java.util.List;
  * @author zgr
  * @version 1.0
  * @date 2022/3/28 14:41
+ * 获取用户权限
  */
 
 @Service
@@ -34,8 +35,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserRoleService userRoleService;
 
     /**
-     * 登录界面调用
-     * 生成的token中包含的数据为JwtUser
+     * 这里返回的UserDetails其实就是
+     * 返回实现了UserDetails接口的实体类
+     * 在这个实体类中设置了用户权限的列表
      *
      * @param s
      * @return

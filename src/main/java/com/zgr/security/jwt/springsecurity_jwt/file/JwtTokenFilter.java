@@ -35,9 +35,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String authHeader = request.getHeader(Const.HEADER_STRING);
-        System.out.println("token：" + authHeader);
-        System.out.println("访问路径：" + request.getServletPath() + ";;;;" + request.getRequestURI() + ":::+");
-        System.out.println("账号密码：" + request.getParameter("username") + "::::::" + request.getParameter("password"));
+       // System.out.println("token：" + authHeader);
+        //System.out.println("访问路径：" + request.getServletPath() + ";;;;" + request.getRequestURI() + ":::+");
+        //System.out.println("账号密码：" + request.getParameter("username") + "::::::" + request.getParameter("password"));
         //  System.out.println("token是否包含某前缀：" + authHeader.startsWith(Const.TOKEN_PREFIX));
         if (authHeader != null) {
             String username = jwtUtil.getUsernameFromToken(authHeader);
