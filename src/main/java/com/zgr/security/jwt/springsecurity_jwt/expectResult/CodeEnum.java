@@ -1,4 +1,4 @@
-package com.zgr.security.jwt.springsecurity_jwt.except.expectResult;
+package com.zgr.security.jwt.springsecurity_jwt.expectResult;
 
 /**
  * ClassName: CodeEnum
