@@ -21,8 +21,8 @@ public class ResultUtil {
         return new MyResult<>(false, errorCode, errorMsg, data);
     }
 
-    public static <T> MyResult<T> error(T data) {
-        return new MyResult<>(false, "400", null, data);
+    public static <T> MyResult<T> error(String data) {
+        return error( "400", data, null);
     }
 
 

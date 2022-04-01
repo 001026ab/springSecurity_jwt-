@@ -2,12 +2,12 @@ package com.zgr.security.jwt.springsecurity_jwt.controller;
 
 
 import com.zgr.security.jwt.springsecurity_jwt.entity.User;
+import com.zgr.security.jwt.springsecurity_jwt.returnResult.MyResult;
 import com.zgr.security.jwt.springsecurity_jwt.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,18 +22,18 @@ public class JwtAuthController {
     private AuthService authService;
 
 
-    @RequestMapping(value = "/authentication/login", method = RequestMethod.POST)
-    public String createToken( String username,String password ) throws AuthenticationException {
+    @PostMapping(value = "/authentication/login")
+    public MyResult<String> createToken(String username, String password ) throws AuthenticationException {
         return authService.login( username, password );
     }
 
 
-    @RequestMapping(value = "/authentication/register", method = RequestMethod.POST)
-    public User register( @RequestBody User addedUser ) throws AuthenticationException {
+    @PostMapping(value = "/authentication/register")
+    public MyResult<User> register( @RequestBody User addedUser ) throws AuthenticationException {
         return authService.register(addedUser);
     }
 
-    @RequestMapping(value = "/authentication/test", method = RequestMethod.POST)
+    @PostMapping(value = "/authentication/test")
     public String test5() {
         User user = new User();
         user.setUsername("24211");
