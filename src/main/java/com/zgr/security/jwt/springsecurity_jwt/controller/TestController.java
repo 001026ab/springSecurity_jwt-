@@ -1,6 +1,8 @@
 package com.zgr.security.jwt.springsecurity_jwt.controller;
 
 import com.zgr.security.jwt.springsecurity_jwt.entity.User;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @www.codesheep.cn 20190312
  */
 @RestController
+@Api(tags = "测试")
 public class TestController {
 
     /**
@@ -25,6 +28,7 @@ public class TestController {
      *
      * @return
      */
+    @ApiOperation(value = "测试权限'ROLE_NORMAL2','ROLE_ADMIN'")
     @PreAuthorize("hasAnyAuthority('ROLE_NORMAL2','ROLE_ADMIN')")
     @RequestMapping(value = "/normal/test", method = RequestMethod.GET)
     public String test1() {

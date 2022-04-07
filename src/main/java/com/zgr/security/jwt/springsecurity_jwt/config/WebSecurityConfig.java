@@ -13,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -61,6 +62,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT).authenticated()
                 .antMatchers(HttpMethod.DELETE).authenticated()
                 .antMatchers(HttpMethod.GET).authenticated()
+                // 任意访问,放行swagger
+                /* .antMatchers("/swagger-ui.html").permitAll()
+                 .antMatchers("/swagger-resources/**").permitAll()
+                 .antMatchers("/webjars/**").permitAll()
+                 .antMatchers("/v2/**").permitAll()
+                 .antMatchers("/api/**").permitAll()*/
+                //.antMatchers("/*/api-docs").permitAll()
                 //那两个异常文件只需要在这里配置就可以，在and后面
                 .and()
                 //token异常或过期，无token等异常处理
@@ -71,6 +79,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
         httpSecurity.headers().cacheControl();
+    }
+
+    /**
+     * 放行swagger3.0
+     * 注意不同版本的swagger需要放行的资源路径不一样
+     *
+     * @param web 忽略拦截url或静态资源文件夹 - web.ignoring(): 会直接过滤该url - 将不会经过Spring Security过滤器链
+     *            http.permitAll(): 不会绕开springsecurity验证，相当于是允许该路径通过
+     */
+    @Override
+    public void configure(WebSecurity web) {
+        //放过所有get请求
+        //web.ignoring().antMatchers(HttpMethod.GET);
+        //登陆相关
+        //web.ignoring().antMatchers("/app/login/**","/app/password");
+        //swagger3相关接口 ,放行swagger3
+        web.ignoring().antMatchers("/v3/**", "/doc.html", "/webjars/**", "/swagger**/**");
     }
 
 }
