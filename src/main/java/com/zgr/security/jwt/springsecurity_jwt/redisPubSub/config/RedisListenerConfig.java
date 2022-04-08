@@ -1,4 +1,4 @@
-package com.zgr.security.jwt.springsecurity_jwt.redisPubSub;
+package com.zgr.security.jwt.springsecurity_jwt.redisPubSub.config;
 
 /**
  * @author zgr
