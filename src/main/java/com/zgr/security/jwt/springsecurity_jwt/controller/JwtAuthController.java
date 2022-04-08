@@ -22,16 +22,7 @@ public class JwtAuthController {
     @Autowired
     private AuthService authService;
 
-    @Autowired
-    private  StringRedisTemplate redisTemplate;
 
-
-    @GetMapping(value = "/authentication/test666")
-    public void test666(){
-        redisTemplate.convertAndSend("topic1","2020顺利度过---1");
-        redisTemplate.convertAndSend("topic2","2020顺利度过---2");
-        redisTemplate.convertAndSend("topic3","2020顺利度过---3");
-    }
     @PostMapping(value = "/authentication/login")
     public MyResult<String> createToken(String username, String password) throws AuthenticationException {
         return authService.login(username, password);

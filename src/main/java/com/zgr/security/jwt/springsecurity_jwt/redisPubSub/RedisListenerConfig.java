@@ -13,30 +13,34 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.Topic;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Configuration(value = "RedisListenerConfigTopic")
 public class RedisListenerConfig {
-    //redisTemplate
+    /**
+     * redisTemplate
+     */
+
     @Autowired
     private RedisTemplate redisTemplate;
-
-    //redis连接工厂
+    /**
+     * redis连接工厂
+     */
     @Autowired
     private RedisConnectionFactory connectionFactory;
-
-    //redis 消息监听器
+    /**
+     * redis 消息监听器
+     */
     @Autowired
     private MessageListener redisMsgListener;
 
-
-    //任务池
+    /**
+     * 任务池
+     */
     private ThreadPoolTaskScheduler taskScheduler;
 
 
@@ -44,8 +48,8 @@ public class RedisListenerConfig {
      * 创建任务池,运行线程等待处理redis消息
      */
     @Bean
-    public ThreadPoolTaskScheduler iniTaskScheduler(){
-        if(taskScheduler != null){
+    public ThreadPoolTaskScheduler iniTaskScheduler() {
+        if (taskScheduler != null) {
             return taskScheduler;
         }
         taskScheduler = new ThreadPoolTaskScheduler();
@@ -54,11 +58,10 @@ public class RedisListenerConfig {
     }
 
     /**
-     *定义Redis的监听容器
-
+     * 定义Redis的监听容器
      */
     @Bean
-    public RedisMessageListenerContainer initRedisContainer(){
+    public RedisMessageListenerContainer initRedisContainer() {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         //redis 连接工厂
         container.setConnectionFactory(connectionFactory);
@@ -68,7 +71,7 @@ public class RedisListenerConfig {
         //Topic topic = new ChannelTopic("topic1");
         List<Topic> topicList = TopicEnum.getTopicList();
         //定义监听器监听的Redis的消息,接收的是Topic实体类型的数据
-        container.addMessageListener(redisMsgListener,topicList);
+        container.addMessageListener(redisMsgListener, topicList);
         return container;
     }
 }

@@ -25,7 +25,7 @@ public enum TopicEnum {
     TOPIC_2("topic2"),
     TOPIC_3("topic3"),
     ;
-    private String topicName;
+    private String topic;
 
     /**
      * 主题列表
@@ -37,9 +37,18 @@ public enum TopicEnum {
         ArrayList<Topic> strings = new ArrayList<>();
         for (TopicEnum value : TopicEnum.values()) {
             //转换为topic类型的监听才可以生效
-            Topic topic = new ChannelTopic(value.getTopicName());
+            Topic topic = new ChannelTopic(value.getTopic());
             strings.add(topic);
         }
         return strings;
+    }
+
+    public static TopicEnum getTopicEnumByTopic(String value) {
+        for (TopicEnum topicEnum : TopicEnum.values()) {
+            if (topicEnum.getTopic().equals(value)) {
+                return topicEnum;
+            }
+        }
+        return null;
     }
 }
