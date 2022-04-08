@@ -23,6 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * @author ufi
  * @www.codesheep.cn 20190312
+ * SpringSecurity+jwt
  */
 @Configuration
 @EnableWebSecurity

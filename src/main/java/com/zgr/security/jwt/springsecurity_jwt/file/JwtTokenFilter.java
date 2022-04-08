@@ -21,6 +21,8 @@ import java.io.IOException;
  * @author zgr
  * @version 1.0
  * @date 2022/3/28 15:18
+ * SpringSecurity+jwt
+ * 过滤器token校验
  */
 
 @Component
@@ -35,7 +37,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String authHeader = request.getHeader(Const.HEADER_STRING);
-       // System.out.println("token：" + authHeader);
+        // System.out.println("token：" + authHeader);
         //System.out.println("访问路径：" + request.getServletPath() + ";;;;" + request.getRequestURI() + ":::+");
         //System.out.println("账号密码：" + request.getParameter("username") + "::::::" + request.getParameter("password"));
         //  System.out.println("token是否包含某前缀：" + authHeader.startsWith(Const.TOKEN_PREFIX));

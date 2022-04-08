@@ -1,0 +1,37 @@
+server:
+  port: 8028
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.126.133:3306/docker?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  jackson:
+    serialization:
+      indent_output: true
+
+  redis:
+    database: 0
+    password:  # Redis服务器连接密码（默认为空）
+    timeout: 500 # 连接超时时间（毫秒）
+    host: 192.168.126.133
+    port: 6379
+
+logging:
+  level:
+    org:
+      springframework:
+        security: info
+
+
+#开启驼峰模式
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+
+#打印sql语句
+#mybatis-plus.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
